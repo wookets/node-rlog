@@ -16,7 +16,11 @@ log = rlog.create('A new running logger');
 
 log('A log message', data);
 
-log.html() // this will return an html formatted output of everything logged thus far
+log('all done!').html(); // this will return an html formatted output of everything logged thus far
+
+// or
+
+log().html();
 
 ```
 
