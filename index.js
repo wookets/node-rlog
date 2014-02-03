@@ -38,7 +38,7 @@ var formatDuration = function(duration) {
     duration += 'ms';
   } else if (duration > 1000) {
     duration /= 1000;
+    duration += 's';
   }
-  duration += 's';
   return duration;
 }
