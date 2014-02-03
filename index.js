@@ -10,7 +10,7 @@ exports.create = function(name) {
       var result = '';
       result = '<b>' + log.name + '</b> <br/><br/>';
       for (var i=0; i < log.events.length; i++) {
-        result += (i+1) + '. [' + log.events[i].lapse + '] ' + log.events[i].msg + '<br />';
+        result += (i+1) + '. ' + log.events[i].msg + ' [' + log.events[i].lapse + '] <br />';
       }
       result += '<br />Took ' + log.duration
       return result;
