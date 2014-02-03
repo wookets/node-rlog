@@ -12,11 +12,11 @@ In package.json, under dependencies, you can do...
 ```
 var rlog = require('rlog');
 
-rlog = rlog.create('A new running logger');
+log = rlog.create('A new running logger');
 
-rlog('A log message', data);
+log('A log message', data);
 
-rlog() // this will return the final rlog object to be used for debugging or sending an email
+log.html() // this will return an html formatted output of everything logged thus far
 
 ```
 

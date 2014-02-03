@@ -3,28 +3,31 @@ exports.create = function(name) {
   var log = {
     name: name,
     start: new Date,
-    events: []
+    end: null,
+    duration: null,
+    events: [],
+    html: function() { // format a report in html and return it
+      var result = '';
+      result = '<b>' + log.name + '</b> <br/><br/>';
+      for (var i=0; i < log.events.length; i++) {
+        result += (i+1) + '. [' + event[i].lapse + '] ' + event[i].msg + '<br />';
+      }
+      result += '<br />Took ' + log.duration
+      return result;
+    }
   }
   return function(msg, data) {
-    // if empty msg, then assume we just want to get all logged events up to this point
-    if (!msg) {
-      log.end = new Date;
-      log.duration = formatDuration(log.end - log.start);
-      return log;
-    }
-    // log a new event
     var event = {};
     event.msg = msg;
+    event.data = data;
     event.lapse = formatDuration(new Date - log.start);
-    if (data != null) {
-      event.data = data;
-    }
     log.events.push(event);
     log.end = new Date;
     log.duration = formatDuration(log.end - log.start);
     return log;
   }
 }
+
 
 // pass in duration in milliseconds and get back a human readible string
 var formatDuration = function(duration) {

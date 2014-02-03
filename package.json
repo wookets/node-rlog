@@ -1,6 +1,6 @@
 {
   "name": "rlog",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "./index",
   "author": "wookets <wookets@gmail.com>",
   "repository": {
@@ -11,7 +11,6 @@
     "node": ">= 0.10.x"
   },
   "dependencies": {
-    "emailer": "https://github.com/wookets/node-emailer/tarball/0.1.0"
   },
   "devDependencies": {
   }
