@@ -1,25 +1,7 @@
 
-exports.create = function(name) {
-  var log = {
-    name: name,
-    start: new Date,
-    end: null,
-    duration: null,
-    events: [],
-    html: function() { // format a report in html and return it
-      var result = '';
-      result = '<b>' + log.name + '</b> <br/><br/>';
-      for (var i=0; i < log.events.length; i++) {
-        result += (i+1) + '. ' + log.events[i].msg + ' [' + log.events[i].lapse + '] <br />';
-      }
-      result += '<br />Took ' + log.duration
-      return result;
-    }
-  }
-  return function(msg, data) {
-    if (msg == null) { // shortcut if someone just wants to get at the log object
-      return log;
-    }
+module.exports = function(name) {
+  var log = function(msg, data) {
+    if (msg == null) return log;
     var event = {};
     event.msg = msg;
     event.data = data;
@@ -29,11 +11,18 @@ exports.create = function(name) {
     log.duration = formatDuration(log.end - log.start);
     return log;
   }
+  log.category = name;
+  log.start = new Date;
+  log.end = null;
+  log.duration = null;
+  log.events = [];
+  log.html = function() { return format(log, 'html'); }
+  log.text = function() { return format(log, 'text'); }
+  return log;
 }
 
-
 // pass in duration in milliseconds and get back a human readible string
-var formatDuration = function(duration) {
+function formatDuration(duration) {
   if (duration < 1000) {
     duration += 'ms';
   } else if (duration > 1000) {
@@ -41,4 +30,21 @@ var formatDuration = function(duration) {
     duration += 's';
   }
   return duration;
+}
+
+function format(log, type) {
+  var br = '\n';
+  if (type === 'html') br = '<br />';
+  var result = '';
+  if (type === 'html') result += '<b>' + log.category + '</b>';
+  else result += log.category;
+  result += br;
+  if (type === 'html') result += br;
+  for (var i=0; i < log.events.length; i++) {
+    result += (i+1) + '. ' + log.events[i].msg + ' [' + log.events[i].lapse + ']';
+    result += br;
+  }
+  result += br;
+  result += 'Took ' + log.duration
+  return result;
 }
