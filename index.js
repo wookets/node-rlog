@@ -44,7 +44,7 @@ function format(log, type) {
     result += (i+1) + '. ' + log.events[i].msg + ' [' + log.events[i].lapse + ']';
     result += br;
   }
-  result += br;
+  if (type === 'html') result += br;
   result += 'Took ' + log.duration
   return result;
 }
