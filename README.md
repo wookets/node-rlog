@@ -4,6 +4,8 @@ A running logger for node.
 
 ## Install
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/wookets/node-rlog.svg)](https://greenkeeper.io/)
+
 In package.json, under dependencies, you can do...
 
 ```"rlog": "https://github.com/wookets/node-rlog/0.2.0"```
